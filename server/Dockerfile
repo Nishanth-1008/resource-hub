@@ -1,16 +1,23 @@
-FROM php:8.1-cli
+# Use the official PHP image with Apache for better compatibility
+FROM php:8.1-apache
 
-# Install required extensions if needed (e.g., mysqli for MySQL)
-RUN docker-php-ext-install mysqli
+# Enable the Apache rewrite module (if you need clean URLs for routing)
+RUN a2enmod rewrite
 
-# Set working directory
+# Install required PHP extensions
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Set the working directory to the Apache public HTML folder
 WORKDIR /var/www/html
 
-# Copy your PHP files to container
-COPY . .
+# Copy the PHP files from your local machine to the container
+COPY ./backend/ /var/www/html/
 
-# Expose port
-EXPOSE 8080
+# Set appropriate permissions (if needed)
+RUN chown -R www-data:www-data /var/www/html/
 
-# Run PHP server
-CMD ["php", "-S", "0.0.0.0:8080"]
+# Expose the necessary port (80 is default for Apache)
+EXPOSE 80
+
+# Start Apache in the foreground
+CMD ["apache2-foreground"]
