@@ -1,81 +1,69 @@
-import React, { useState, useEffect } from 'react';
+// src/pages/Notes.jsx
+import React, { useEffect, useState } from 'react';
 import './styles/Notes.css';
-import { defaultNotes } from '../data/defaultNotes';
 
-function Notes() {
-  const [notesData, setNotesData] = useState({});
-  const [openFolder, setOpenFolder] = useState(null);
-  const [modalUrl, setModalUrl] = useState(null);
+// Helper function to load notes from localStorage
+const loadNotes = () => {
+  try {
+    const savedNotes = localStorage.getItem('class-notes');
+    return savedNotes ? JSON.parse(savedNotes) : { subjects: {} };
+  } catch (error) {
+    console.error('Failed to load notes:', error);
+    return { subjects: {} };
+  }
+};
 
-  // On mount: load from localStorage or fallback
+export default function Notes() {
+  const [notes, setNotes] = useState({ subjects: {} });
+  const [modal, setModal] = useState({ open: false, link: '', title: '' });
+
+  // Load notes on component mount
   useEffect(() => {
-    const saved = localStorage.getItem('resourceHubNotes');
-    setNotesData(saved ? JSON.parse(saved) : defaultNotes);
+    const loadedNotes = loadNotes();
+    setNotes(loadedNotes);
   }, []);
-
-  const toggleFolder = (folder) => {
-    setOpenFolder(openFolder === folder ? null : folder);
-  };
-
-  const openPDF = (fileId) => {
-    if (!fileId) {
-      alert("This file is no longer available. Please upload it again.");
-      return;
-    }
-    setModalUrl(`https://drive.google.com/file/d/${fileId}/preview`);
-  };
-
-  const closeModal = () => setModalUrl(null);
 
   return (
     <div className="notes-container">
-      <h1>🎮 Hacker's Notes Portal</h1>
-      <div className="notes-board">
-        {Object.keys(notesData).map(subject => (
-          <div key={subject} className="folder">
-            <div className="folder-header" onClick={() => toggleFolder(subject)}>
-              📂 {subject}
-            </div>
-            {openFolder === subject && (
-              <div className="folder-content">
-                {Object.keys(notesData[subject]).map(topic => (
-                  <div key={topic} className="topic">
-                    <div className="topic-header">🗂️ {topic}</div>
-                    <div className="files">
-                      {notesData[subject][topic].map((file, i) => (
-                        <div
-                          key={i}
-                          className="file"
-                          onClick={() => openPDF(file.fileId)}
-                        >
-                          📄 {file.title}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+      <h1>Class Notes</h1>
+      
+      {Object.entries(notes.subjects).map(([sub, topics]) => (
+        <section key={sub} className="subject">
+          <h2>{sub}</h2>
+          
+          {Object.entries(topics).map(([topic, files]) => (
+            <div key={topic} className="topic">
+              <h3>{topic}</h3>
+              
+              <ul>
+                {files.map((f, i) => (
+                  <li key={i}>
+                    <button onClick={() => setModal({ open: true, link: f.link, title: f.title })}>
+                      {f.title}
+                    </button>
+                  </li>
                 ))}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+              </ul>
+            </div>
+          ))}
+        </section>
+      ))}
 
-      {modalUrl && (
-        <div className="modal-overlay" onClick={closeModal}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <button className="modal-close" onClick={closeModal}>✕</button>
+      {modal.open && (
+        <div className="modal" onClick={() => setModal({ open: false })}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="close-btn" onClick={() => setModal({ open: false })}>
+              ×
+            </button>
+            <h4>{modal.title}</h4>
             <iframe
-              className="iframe-player"
-              src={modalUrl}
-              allow="autoplay"
-              allowFullScreen
-              title="PDF Viewer"
-            ></iframe>
+              src={modal.link}
+              className="pdf-frame"
+              title={modal.title}
+            />
           </div>
         </div>
       )}
     </div>
   );
 }
-
-export default Notes;

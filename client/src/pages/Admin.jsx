@@ -1,157 +1,128 @@
 // src/pages/Admin.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/Admin.css';
-import { defaultNotes } from '../data/defaultNotes';
+
+// Helper function to load notes from localStorage
+const loadNotes = () => {
+  try {
+    const savedNotes = localStorage.getItem('class-notes');
+    return savedNotes ? JSON.parse(savedNotes) : { subjects: {} };
+  } catch (error) {
+    console.error('Failed to load notes:', error);
+    return { subjects: {} };
+  }
+};
+
+// Helper function to save notes to localStorage
+const saveNotes = (notes) => {
+  try {
+    localStorage.setItem('class-notes', JSON.stringify(notes));
+  } catch (error) {
+    console.error('Failed to save notes:', error);
+  }
+};
 
 export default function Admin() {
-  const [data, setData] = useState({});
-  const [form, setForm] = useState({ subject: '', topic: '', title: '', fileId: '' });
+  const [notes, setNotes] = useState(loadNotes());
 
-  // Load existing or default on mount
+  // Load notes on component mount
   useEffect(() => {
-    const saved = localStorage.getItem('resourceHubNotes');
-    setData(saved ? JSON.parse(saved) : defaultNotes);
+    const loadedNotes = loadNotes();
+    setNotes(loadedNotes);
   }, []);
 
-  // Save to localStorage whenever data changes
-  useEffect(() => {
-    localStorage.setItem('resourceHubNotes', JSON.stringify(data));
-  }, [data]);
-
-  const addSubject = () => {
-    if (!form.subject || data[form.subject]) return;
-    setData({ ...data, [form.subject]: {} });
-    setForm({ ...form, subject: '' });
+  // Save helper
+  const save = async (newNotes) => {
+    setNotes(newNotes);
+    saveNotes(newNotes);
   };
 
-  const addTopic = (sub) => {
-    if (!form.topic || data[sub][form.topic]) return;
-    setData({
-      ...data,
-      [sub]: { ...data[sub], [form.topic]: [] }
-    });
-    setForm({ ...form, topic: '' });
+  // CRUD operations
+  const addSubject = async () => {
+    const name = prompt('Subject name?');
+    if (!name) return;
+    const copy = { ...notes };
+    copy.subjects[name] = {};
+    await save(copy);
   };
 
-  const addFile = () => {
-    if (!form.subject || !form.topic || !form.title || !form.fileId) {
-      return alert('Fill all fields');
-    }
-    const updated = {
-      ...data,
-      [form.subject]: {
-        ...data[form.subject],
-        [form.topic]: [
-          ...(data[form.subject][form.topic] || []),
-          { title: form.title, fileId: form.fileId }
-        ]
-      }
-    };
-    setData(updated);
-    setForm({ ...form, title: '', fileId: '' });
+  const deleteSubject = async (sub) => {
+    if (!confirm(`Delete ${sub}?`)) return;
+    const copy = { ...notes };
+    delete copy.subjects[sub];
+    await save(copy);
   };
 
-  const removeSubject = (sub) => {
-    const { [sub]: _, ...rest } = data;
-    setData(rest);
+  const addTopic = async (sub) => {
+    const topic = prompt('Topic name?');
+    if (!topic) return;
+    const copy = { ...notes };
+    copy.subjects[sub][topic] = [];
+    await save(copy);
   };
 
-  const removeTopic = (sub, top) => {
-    const { [top]: _, ...rest } = data[sub];
-    setData({ ...data, [sub]: rest });
+  const deleteTopic = async (sub, topic) => {
+    if (!confirm(`Delete ${topic}?`)) return;
+    const copy = { ...notes };
+    delete copy.subjects[sub][topic];
+    await save(copy);
   };
 
-  const removeFile = (sub, top, idx) => {
-    const arr = [...data[sub][top]];
-    arr.splice(idx, 1);
-    setData({
-      ...data,
-      [sub]: { ...data[sub], [top]: arr }
-    });
+  const addFile = async (sub, topic) => {
+    const title = prompt('File title?');
+    const link = prompt('Drive preview link?');
+    if (!title || !link) return;
+    const copy = { ...notes };
+    copy.subjects[sub][topic].push({ title, link });
+    await save(copy);
+  };
+
+  const deleteFile = async (sub, topic, idx) => {
+    if (!confirm('Delete file?')) return;
+    const copy = { ...notes };
+    copy.subjects[sub][topic].splice(idx, 1);
+    await save(copy);
   };
 
   return (
     <div className="admin-container">
-      <h1>🛠️ Admin Dashboard</h1>
-
-      <section className="admin-section">
-        <h2>Subjects &amp; Topics</h2>
-        <div className="btn-row">
-          <input
-            placeholder="New Subject"
-            value={form.subject}
-            onChange={e => setForm({ ...form, subject: e.target.value })}
-          />
-          <button onClick={addSubject}>+ Subject</button>
-        </div>
-
-        {Object.keys(data).map(sub => (
-          <div key={sub} className="subject-block">
-            <div className="subject-header">
-              📁 {sub}
-              <button className="del-btn" onClick={() => removeSubject(sub)}>✕</button>
-            </div>
-            <div className="btn-row">
-              <input
-                placeholder={`New Topic under ${sub}`}
-                value={form.topic}
-                onChange={e => setForm({ ...form, topic: e.target.value })}
-              />
-              <button onClick={() => addTopic(sub)}>+ Topic</button>
-            </div>
-            {Object.keys(data[sub]).map(top => (
-              <div key={top} className="topic-block">
-                <div className="topic-header">
-                  🗂️ {top}
-                  <button className="del-btn" onClick={() => removeTopic(sub, top)}>✕</button>
-                </div>
-                <ul className="file-list">
-                  {data[sub][top].map((f, i) => (
-                    <li key={i}>
-                      📄 {f.title} ({f.fileId})
-                      <button className="del-btn" onClick={() => removeFile(sub, top, i)}>✕</button>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+      <h1>Admin – Manage Notes</h1>
+      <button className="add-btn" onClick={addSubject}>
+        + Add Subject
+      </button>
+      
+      {Object.entries(notes.subjects).map(([sub, topics]) => (
+        <div key={sub} className="subject-block">
+          <div className="subject-header">
+            <h2>{sub}</h2>
+            <button onClick={() => deleteSubject(sub)}>× Delete Subject</button>
           </div>
-        ))}
-      </section>
-
-      <section className="admin-section">
-        <h2>Add a File</h2>
-        <div className="add-file-form">
-          <select
-            value={form.subject}
-            onChange={e => setForm({ ...form, subject: e.target.value })}
-          >
-            <option value="">Select Subject</option>
-            {Object.keys(data).map(sub => <option key={sub} value={sub}>{sub}</option>)}
-          </select>
-          <select
-            value={form.topic}
-            onChange={e => setForm({ ...form, topic: e.target.value })}
-            disabled={!form.subject}
-          >
-            <option value="">Select Topic</option>
-            {form.subject && Object.keys(data[form.subject]).map(top => (
-              <option key={top} value={top}>{top}</option>
-            ))}
-          </select>
-          <input
-            placeholder="File Title"
-            value={form.title}
-            onChange={e => setForm({ ...form, title: e.target.value })}
-          />
-          <input
-            placeholder="Drive File ID"
-            value={form.fileId}
-            onChange={e => setForm({ ...form, fileId: e.target.value })}
-          />
-          <button onClick={addFile}>+ Add File</button>
+          <button className="add-btn" onClick={() => addTopic(sub)}>
+            + Add Topic
+          </button>
+          
+          {Object.entries(topics).map(([topic, files]) => (
+            <div key={topic} className="topic-block">
+              <div className="topic-header">
+                <h3>{topic}</h3>
+                <button onClick={() => deleteTopic(sub, topic)}>× Delete Topic</button>
+              </div>
+              <button className="add-btn" onClick={() => addFile(sub, topic)}>
+                + Add File
+              </button>
+              
+              <ul className="files-list">
+                {files.map((f, i) => (
+                  <li key={i}>
+                    <span>{f.title}</span>
+                    <button onClick={() => deleteFile(sub, topic, i)}>× Delete</button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      </section>
+      ))}
     </div>
   );
 }
