@@ -1,209 +1,123 @@
-/* Notes.css - Hacker Terminal Theme */
+/* Notes.css - Clean Left-Aligned Dropdowns */
 .notes-container {
-  padding: 2rem;
-  background: #0a0a0a;
-  color: #0f0; /* Matrix green */
-  font-family: 'Courier New', monospace;
-  min-height: 100vh;
-  border: 1px solid #0f0;
-  box-shadow: 0 0 10px #0f0;
-  position: relative;
-  overflow: hidden;
+  padding: 16px;
+  font-family: Arial, sans-serif;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* Terminal scanlines effect */
-.notes-container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-      rgba(0, 255, 0, 0.05) 1px,
-      transparent 1px
-  );
-  background-size: 100% 2px;
-  pointer-events: none;
-  animation: scanline 8s linear infinite;
-}
-
-@keyframes scanline {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 100%; }
-}
-
-.notes-container h1 {
-  text-align: center;
-  color: #0f0;
-  text-shadow: 0 0 5px #0f0;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  position: relative;
-  padding-bottom: 0.5rem;
-}
-
-.notes-container h1::after {
-  content: "_";
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-  from, to { opacity: 0; }
-  50% { opacity: 1; }
-}
-
-.subject {
-  margin-top: 1.5rem;
-  border-left: 2px solid #0f0;
-  padding-left: 1rem;
-  position: relative;
-}
-
-.subject::before {
-  content: "📁";
-  position: absolute;
-  left: -1.5rem;
-  color: #0f0;
-}
-
-.subject h2 {
-  color: #0f0;
-  margin-bottom: 0.5rem;
+/* Header */
+.notes-title {
   font-size: 1.5rem;
-  text-shadow: 0 0 3px #0f0;
+  margin-bottom: 20px;
+  font-weight: 600;
 }
 
-.topic {
-  margin-left: 1rem;
-  margin-bottom: 1rem;
-  border-left: 1px dashed #0f0;
-  padding-left: 1rem;
-  position: relative;
+/* Subjects */
+.subject {
+  margin-bottom: 8px;
 }
 
-.topic::before {
-  content: "📂";
-  position: absolute;
-  left: -1.5rem;
-  color: #0f0;
-}
-
-.topic h3 {
-  color: #0f0;
-  margin-bottom: 0.3rem;
-  font-size: 1.2rem;
-}
-
-.topic ul {
-  list-style: none;
-  padding-left: 1rem;
-}
-
-.topic li {
-  position: relative;
-  margin: 0.5rem 0;
-}
-
-.topic li::before {
-  content: "📄";
-  position: absolute;
-  left: -1.5rem;
-  color: #0f0;
-}
-
-.topic li button {
-  background: none;
-  border: none;
-  color: #0f0;
+.subject-header {
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  font-family: 'Courier New', monospace;
-  font-size: 1rem;
-  padding: 0.2rem 0.5rem;
-  text-shadow: 0 0 2px #0f0;
-  position: relative;
+  padding: 8px 0;
+  user-select: none;
 }
 
-.topic li button:hover {
-  background: rgba(0, 255, 0, 0.1);
-  outline: 1px dashed #0f0;
+.subject-toggle {
+  margin-right: 8px;
+  font-size: 0.9rem;
 }
 
-.topic li button::after {
-  content: "_";
-  position: absolute;
-  right: -0.3rem;
-  animation: blink 1s step-end infinite;
+.subject-name {
+  font-weight: 500;
 }
 
-/* Modal styles - Hacker version */
-.modal {
+/* Topics */
+.topic {
+  margin-left: 24px;
+  margin-bottom: 8px;
+}
+
+.topic-header {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 6px 0;
+  user-select: none;
+}
+
+.topic-toggle {
+  margin-right: 8px;
+  font-size: 0.8rem;
+}
+
+.topic-name {
+  font-style: italic;
+}
+
+/* Files */
+.file-list {
+  margin-left: 48px;
+  padding: 0;
+  list-style: none;
+}
+
+.file-item {
+  padding: 4px 0;
+  cursor: pointer;
+  color: #0066cc;
+}
+
+.file-item:hover {
+  text-decoration: underline;
+}
+
+/* Modal */
+.modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 10, 0, 0.9);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 1000;
-  border: 1px solid #0f0;
-  box-shadow: 0 0 20px #0f0;
 }
 
 .modal-content {
-  background: #0a0a0a;
-  padding: 1.5rem;
-  border-radius: 0;
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
   width: 90%;
-  max-width: 900px;
+  max-width: 800px;
   max-height: 90vh;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #0f0;
-  color: #0f0;
-  font-family: 'Courier New', monospace;
-  position: relative;
 }
 
-.modal-content::before {
-  content: "SYSTEM_VIEWER.EXE";
-  position: absolute;
-  top: -1.8rem;
-  left: 0;
-  background: #0a0a0a;
-  padding: 0 0.5rem;
-  border: 1px solid #0f0;
-  border-bottom: none;
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-title {
+  font-weight: 500;
 }
 
 .close-btn {
-  align-self: flex-end;
-  background: transparent;
-  border: 1px solid #0f0;
-  color: #0f0;
-  font-family: 'Courier New', monospace;
-  font-size: 1rem;
+  background: none;
+  border: none;
   cursor: pointer;
-  padding: 0.3rem 0.8rem;
-  margin-bottom: 1rem;
+  font-size: 1.2rem;
 }
 
-.close-btn:hover {
-  background: rgba(0, 255, 0, 0.2);
-}
-
-.pdf-frame {
-  flex: 1;
+.pdf-viewer {
   width: 100%;
-  border: 1px solid #0f0;
-  margin-top: 0.5rem;
-  background: #000;
-}
-
-/* Terminal-like blinking cursor effect */
-@keyframes terminal-blink {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
+  height: 80vh;
+  border: 1px solid #ddd;
 }
