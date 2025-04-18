@@ -8,7 +8,7 @@ function BottomNavbar() {
   return (
     <div className="bottom-navbar">
       <Link to="/more" className="nav-icon"><i className="fas fa-bars"></i></Link>
-      <Link to="/calendar" className="nav-icon"><i className="fas fa-calendar-alt"></i></Link>
+      <a href="https://resourcehub.rf.gd/" target="_blank" className="nav-icon" rel="noopener noreferrer"><i className="fas fa-calendar-alt"></i></a>
       <Link to="/" className={`nav-icon home-icon ${pathname === '/' ? 'active' : ''}`}>
         <img src="/src/assets/hub.ico" alt="Home" className="home-img"/>
       </Link>

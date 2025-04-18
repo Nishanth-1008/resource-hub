@@ -8,6 +8,7 @@ import Notes from './pages/Notes'
 import Profile from './pages/Profile'
 import More from './pages/More'
 import Recordings from './pages/Recordings';
+import Admin from './pages/Admin'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/more" element={<More />} />
         <Route path="/recordings" element={<Recordings />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
       <BottomNavbar />
     </div>
