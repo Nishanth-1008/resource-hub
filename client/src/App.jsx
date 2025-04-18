@@ -7,6 +7,7 @@ import Calendar from './pages/Calendar'
 import Notes from './pages/Notes'
 import Profile from './pages/Profile'
 import More from './pages/More'
+import Recordings from './pages/Recordings';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/notes" element={<Notes />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/more" element={<More />} />
+        <Route path="/recordings" element={<Recordings />} />
       </Routes>
       <BottomNavbar />
     </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../styles/Calender.css';
+import './styles/Calender.css';
 
 const Calendar = () => {
   const [data, setData] = useState([]);
