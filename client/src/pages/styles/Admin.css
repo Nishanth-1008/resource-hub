@@ -244,3 +244,42 @@ body {
 @media (max-width: 600px) {
   .admin-panel { margin: 1rem; padding: 1rem; }
 }
+
+.contact-form-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 30px;
+  background: rgba(30, 30, 60, 0.7);
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(0, 247, 255, 0.2);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 247, 255, 0.3);
+  border-radius: 8px;
+  color: #e0f7ff;
+  font-family: 'Inter', sans-serif;
+}
+
+.form-group textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.success-message {
+  text-align: center;
+  padding: 20px;
+}
+
+.success-message h3 {
+  color: #00f7ff;
+  margin-bottom: 10px;
+}

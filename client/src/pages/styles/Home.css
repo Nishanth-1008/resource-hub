@@ -1,0 +1,309 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@400;500&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Reset and Base */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(145deg, #0e0e1c, #121222);
+    color: #e0f7ff;
+    scroll-behavior: smooth;
+  }
+  
+  .main-wrapper {
+    padding-bottom: 100px;
+  }
+  
+  /* Hero Section */
+  .hero {
+    padding: 100px 20px 60px;
+    text-align: center;
+    background: radial-gradient(circle at top, #121222, #0e0e1c);
+  }
+  
+  .glow-text {
+    font-size: 3rem;
+    color: #00f7ff;
+    text-shadow: 0 0 2px #00f7ff, 0 0 40px #00bcd4;
+    margin-bottom: 10px;
+  }
+  
+  .glow-text-sm {
+    font-size: 2rem;
+    color: #7efeff;
+    text-shadow: 0 0 6px #00f7ff;
+    margin-bottom: 10px;
+  }
+  
+  .hero-subtext {
+    font-size: 1.2rem;
+    color: #bbbbff;
+    margin-bottom: 30px;
+  }
+  
+  .highlight {
+    color: #00f7ff;
+    font-weight: bold;
+  }
+  
+  .hero-buttons .btn {
+    margin: 0 10px;
+  }
+  
+  /* Buttons */
+  .btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .btn.primary {
+    /* Base Styles */
+    padding: 14px 28px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+    
+    /* Gradient & Shadow */
+    background: linear-gradient(135deg, #00f7ff 0%, #007cf0 100%);
+    box-shadow: 
+      0 0 15px rgba(0, 247, 255, 0.6),
+      0 0 30px rgba(0, 124, 240, 0.3);
+    
+    /* Text */
+    color: #0a0a1a;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    
+    /* Hover Effects */
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 
+        0 0 20px rgba(0, 247, 255, 0.8),
+        0 0 40px rgba(0, 124, 240, 0.5);
+      animation: pulse 2s infinite;
+    }
+    
+    /* Active State */
+    &:active {
+      transform: translateY(1px);
+    }
+    
+    /* Optional Ripple Effect */
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      border-radius: 100%;
+      transform: scale(1, 1) translate(-50%);
+      transform-origin: 50% 50%;
+    }
+    
+    &:focus:not(:active)::after {
+      animation: ripple 1s ease-out;
+    }
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0.7); }
+    70% { box-shadow: 0 0 0 12px rgba(0, 247, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 247, 255, 0); }
+  }
+  
+  @keyframes ripple {
+    0% {
+      transform: scale(0, 0);
+      opacity: 1;
+    }
+    20% {
+      transform: scale(25, 25);
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: scale(40, 40);
+    }
+  }
+  
+  .btn.secondary {
+    background: transparent;
+    border: 2px solid #00f7ff;
+    color: #00f7ff;
+    box-shadow: 0 0 8px #00bcd4;
+  }
+  
+  .btn.tertiary {
+    background: linear-gradient(to right, #007cf0, #00dfd8);
+    color: #fff;
+    box-shadow: 0 0 10px #00dfd8;
+  }
+  
+  .btn:hover {
+    transform: scale(1.05);
+  }
+  
+  /* Features Section */
+  .features {
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(to right top, #0d0d1f, #141430);
+  }
+  
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    width: 100%;
+    max-width: 1000px;
+  }
+  
+    /* Update your existing .feature-card styles */
+/* Replace your existing .feature-card styles with: */
+.feature-card {
+    display: block; /* Links are inline by default */
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color */
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* Keep all your existing feature-card styles */
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px #00f7ff;
+  }
+  
+  .feature-card .feature-icon,
+  .feature-card h3,
+  .feature-card p {
+    pointer-events: none; /* Allows click through text to link */
+  }
+  .feature-icon {
+    font-size: 2rem;
+    color: #00f7ff;
+    margin-bottom: 10px;
+  }
+  
+  /* Preview Section */
+  .preview-section {
+    padding: 80px 20px;
+    background: linear-gradient(145deg, #121222, #0e0e1c);
+  }
+  
+  .preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .preview-text {
+    max-width: 400px;
+    text-align: left;
+  }
+  
+  .preview-box {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    padding: 30px;
+    width: 300px;
+    box-shadow: 0 0 10px #00dfd877;
+  }
+  
+  .dashboard-mockup {
+    display: grid;
+    gap: 15px;
+  }
+  
+  .mock-card {
+    height: 40px;
+    background: linear-gradient(to right, #00dfd8, #007cf0);
+    border-radius: 10px;
+    box-shadow: 0 0 10px #00f7ffaa;
+  }
+  
+  /* Footer CTA */
+  .footer-cta {
+    padding: 60px 20px;
+    background: linear-gradient(to right, #0a0a1a, #121222);
+    text-align: center;
+  }
+  
+  .subscribe-form {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .subscribe-form input {
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+    min-width: 250px;
+    background: #1e1e2e;
+    color: #00f7ff;
+    box-shadow: 0 0 8px #00f7ff55;
+  }
+  
+  .subscribe-form input::placeholder {
+    color: #99ddee;
+  }
+  
+  .subscribe-form .btn {
+    min-width: 140px;
+  }
+  
+  /* Responsive */
+  @media screen and (max-width: 768px) {
+    .glow-text {
+      font-size: 2rem;
+    }
+  
+    .glow-text-sm {
+      font-size: 1.5rem;
+    }
+  
+    .preview-container {
+      flex-direction: column;
+    }
+  }
+  
+  /* Fonts */
+  
