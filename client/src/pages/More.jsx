@@ -15,7 +15,9 @@ const More = () => {
             📲 Join WhatsApp Channel
           </a>
         </li>
-        {/* Add more links here if needed */}
+        <li>
+          <Link to="/admin">🔐 Admin Login</Link>
+        </li>
       </ul>
     </div>
   );

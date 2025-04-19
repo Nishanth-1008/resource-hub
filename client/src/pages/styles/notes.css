@@ -1,123 +1,143 @@
-/* Notes.css - Clean Left-Aligned Dropdowns */
+:root {
+  --neon: #00ffe1;
+  --neon-bg: #0c0c0c;
+  --neon-sub: #0ff;
+  --glass: rgba(0, 255, 255, 0.05);
+  --radius: 10px;
+  --transition: all 0.3s ease;
+}
+
 .notes-container {
-  padding: 16px;
-  font-family: Arial, sans-serif;
-  max-width: 800px;
-  margin: 0 auto;
+  padding: 2rem;
+  background: var(--neon-bg);
+  color: var(--neon);
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 100vh;
 }
 
-/* Header */
 .notes-title {
-  font-size: 1.5rem;
-  margin-bottom: 20px;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--neon);
+  margin-bottom: 2rem;
+  text-align: center;
+  text-shadow: 0 0 10px var(--neon);
 }
 
-/* Subjects */
-.subject {
-  margin-bottom: 8px;
-}
-
-.subject-header {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  padding: 8px 0;
-  user-select: none;
-}
-
-.subject-toggle {
-  margin-right: 8px;
-  font-size: 0.9rem;
-}
-
-.subject-name {
-  font-weight: 500;
-}
-
-/* Topics */
-.topic {
-  margin-left: 24px;
-  margin-bottom: 8px;
-}
-
+.subject-header,
 .topic-header {
   display: flex;
   align-items: center;
+  padding: 0.7rem 1rem;
+  background: var(--glass);
+  border: 1px solid var(--neon);
+  border-radius: var(--radius);
+  margin-bottom: 0.5rem;
   cursor: pointer;
-  padding: 6px 0;
-  user-select: none;
+  transition: var(--transition);
 }
 
-.topic-toggle {
-  margin-right: 8px;
-  font-size: 0.8rem;
+.subject-header:hover,
+.topic-header:hover {
+  background: rgba(0, 255, 255, 0.1);
 }
 
+.subject-name,
 .topic-name {
-  font-style: italic;
+  margin-left: 10px;
+  font-size: 1.1rem;
+  color: var(--neon-sub);
+  font-weight: bold;
 }
 
-/* Files */
+.arrow {
+  font-size: 1.1rem;
+}
+
+.topic {
+  margin-left: 1.5rem;
+}
+
 .file-list {
-  margin-left: 48px;
-  padding: 0;
+  margin-left: 2rem;
+  margin-top: 0.5rem;
   list-style: none;
+  padding: 0;
 }
 
 .file-item {
-  padding: 4px 0;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.3rem;
+  border-left: 3px solid var(--neon);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius);
   cursor: pointer;
-  color: #0066cc;
+  color: #fff;
+  transition: var(--transition);
 }
 
 .file-item:hover {
-  text-decoration: underline;
+  background: rgba(0, 255, 255, 0.2);
+  color: var(--neon);
+  transform: scale(1.02);
 }
 
 /* Modal */
 .modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 999;
 }
 
 .modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 4px;
+  background: #111;
+  color: var(--neon);
   width: 90%;
-  max-width: 800px;
+  max-width: 900px;
   max-height: 90vh;
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: 2px solid var(--neon);
+  box-shadow: 0 0 20px var(--neon);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 1rem;
 }
 
 .modal-title {
-  font-weight: 500;
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-shadow: 0 0 5px var(--neon);
 }
 
 .close-btn {
   background: none;
   border: none;
+  color: var(--neon);
+  font-size: 1.5rem;
   cursor: pointer;
-  font-size: 1.2rem;
+  transition: var(--transition);
+}
+
+.close-btn:hover {
+  color: red;
 }
 
 .pdf-viewer {
+  flex: 1;
   width: 100%;
   height: 80vh;
-  border: 1px solid #ddd;
+  border: 1px solid #333;
+  border-radius: 6px;
 }

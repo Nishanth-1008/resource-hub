@@ -1,40 +1,141 @@
+/* More.css - Obsidian Dark Theme */
 .more-container {
-    padding: 30px 20px;
-    background-color: #0d0d0d;
-    color: #f5f5f5;
-    min-height: 100vh;
-    text-align: center;
-  }
-  
-  .more-container h1 {
-    font-size: 2.2rem;
-    color: #00ceff;
-    margin-bottom: 30px;
-  }
-  
-  .more-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .more-list li {
-    margin: 20px 0;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  background: rgba(13, 13, 13, 0.8); /* Obsidian black with slight transparency */
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 206, 255, 0.1);
+  border: 1px solid rgba(0, 206, 255, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.more-container h1 {
+  color: #00ceff; /* Cyan accent */
+  text-align: center;
+  margin-bottom: 2.5rem;
+  font-size: 2.2rem;
+  font-weight: 600;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  text-shadow: 0 0 10px rgba(0, 206, 255, 0.3);
+}
+
+.more-container h1::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #00ceff, transparent);
+  border-radius: 3px;
+}
+
+.more-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.more-list li {
+  margin: 1.5rem 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.more-list li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 25px rgba(0, 206, 255, 0.2);
+}
+
+.more-list a {
+  display: flex;
+  align-items: center;
+  padding: 1.3rem 1.8rem;
+  background: rgba(30, 30, 30, 0.7);
+  border-radius: 10px;
+  text-decoration: none;
+  color: #e2e8f0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 206, 255, 0.15);
+}
+
+.more-list a:hover {
+  background: rgba(45, 45, 45, 0.7);
+  border-color: rgba(0, 206, 255, 0.3);
+}
+
+.more-list a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, #00ceff, #0084ff);
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.more-list a:hover::before {
+  opacity: 1;
+}
+
+.more-list a span {
+  margin-left: 15px;
+  letter-spacing: 0.5px;
+}
+
+/* Admin link special styling */
+.more-list li:last-child a {
+  background: linear-gradient(135deg, rgba(100, 0, 0, 0.2), rgba(150, 0, 0, 0.3));
+  border: 1px solid rgba(255, 80, 80, 0.3);
+  color: #ff6b6b;
+}
+
+.more-list li:last-child a::before {
+  background: linear-gradient(to bottom, #ff3b3b, #c53030);
+}
+
+.more-list li:last-child a:hover {
+  background: linear-gradient(135deg, rgba(150, 0, 0, 0.3), rgba(200, 0, 0, 0.4));
+  box-shadow: 0 5px 25px rgba(255, 80, 80, 0.2);
+}
+
+/* Emoji styling */
+.more-list a::after {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  filter: drop-shadow(0 0 5px rgba(0, 206, 255, 0.5));
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .more-container {
+    padding: 1.5rem;
+    margin: 1rem;
+    backdrop-filter: blur(4px);
   }
   
   .more-list a {
-    font-size: 1.2rem;
-    color: #ffffff;
-    text-decoration: none;
-    padding: 10px 20px;
-    background-color: #131010;
-    border-radius: 8px;
-    display: inline-block;
-    transition: background-color 0.3s ease;
-    box-shadow: 6px 6px 10px #080606, -6px -6px 10px #1e1a1a;
+    padding: 1.2rem;
+    font-size: 1rem;
   }
-  
-  .more-list a:hover {
-    background-color: #00ceff;
-    color: #000;
-  }
-  
+}
+
+/* Glow animation for the container */
+@keyframes container-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 206, 255, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(0, 206, 255, 0.2); }
+}
+
+.more-container {
+  animation: container-glow 6s ease-in-out infinite;
+}
