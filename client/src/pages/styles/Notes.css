@@ -140,3 +140,20 @@
   height: 80vh;
   border: 1px solid #ddd;
 }
+
+.save-btn {
+  margin-left: 12px;
+  background: rgba(0, 206, 255, 0.1);
+  border: 1px solid rgba(0, 206, 255, 0.3);
+  color: #00ceff;
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.save-btn:hover {
+  background: #00ceff;
+  color: #000;
+}

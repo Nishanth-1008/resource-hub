@@ -58,9 +58,10 @@ const Home = () => {
             <h2 className="glow-text-sm">Next-Gen Dashboard Experience</h2>
             <p>Manage notes, track classes, and explore tools — all from one sleek interface.</p>
             <br></br>
-            <link to="/dashboard">
-            <button className="btn secondary">View Dashboard</button>
-            </link>
+            <div>
+            <Link to="/dashboard"><button className="btn secondary">View Dashboard</button></Link>
+            
+            </div>
           </div>
           <div className="preview-box">
             <div className="dashboard-mockup">

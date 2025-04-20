@@ -35,6 +35,22 @@ const Notes = () => {
     }));
   };
 
+  const saveToLibrary = (file) => {
+    const saved = localStorage.getItem('student-library');
+    const library = saved ? JSON.parse(saved) : [];
+  
+    // avoid duplicates by title+link
+    const alreadyExists = library.some(item => item.title === file.title && item.link === file.link);
+    if (alreadyExists) {
+      alert("Already saved in your library!");
+      return;
+    }
+  
+    library.push(file);
+    localStorage.setItem('student-library', JSON.stringify(library));
+    alert("Saved to your library!");
+  };
+
   return (
     <div className="notes-container">
       <h1 className="notes-title">📂 Class Notes Terminal</h1>
@@ -69,18 +85,20 @@ const Notes = () => {
                 {expandedTopics[`${subjectId}-${topicId}`] && (
                   <ul className="file-list">
                     {files.map((file, index) => (
-                      <li
-                        key={index}
-                        className="file-item"
-                        onClick={() =>
-                          setModal({
-                            open: true,
-                            link: file.link,
-                            title: file.title,
-                          })
-                        }
-                      >
-                        📝 {file.title}
+                      <li key={index} className="file-item">
+                        <span onClick={() => setModal({
+                          open: true,
+                          link: file.link,
+                          title: file.title
+                        })}>
+                          {file.title}
+                        </span>
+                        <button
+                          className="save-btn"
+                          onClick={() => saveToLibrary(file)}
+                        >
+                          📥 Save
+                        </button>
                       </li>
                     ))}
                   </ul>
