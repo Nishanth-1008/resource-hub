@@ -9,6 +9,7 @@ import Profile from './pages/Profile'
 import More from './pages/More'
 import Recordings from './pages/Recordings';
 import Admin from './pages/Admin'
+import StudentDashboard from './pages/StudentDashboard'; 
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/more" element={<More />} />
         <Route path="/recordings" element={<Recordings />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/dashboard" element={<StudentDashboard />} />
       </Routes>
       <BottomNavbar />
     </div>

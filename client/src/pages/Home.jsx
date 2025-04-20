@@ -15,8 +15,12 @@ const Home = () => {
           <p className="hero-subtext">Welcome to <span className="highlight">Resource Hub</span> — A student dashboard built for the future.</p>
           <br></br>
           <div className="hero-buttons">
-            <button className="btn primary">Check Schedule</button>
-            <button className="btn secondary">Watch Recordings</button>
+          <Link to="/calendar">
+            <button className="btn primary" >Check Schedule</button>
+          </Link>
+          <Link to="/notes">
+            <button className="btn secondary">Get Class Notes</button>
+          </Link>
           </div>
         </div>
       </section>
@@ -54,7 +58,9 @@ const Home = () => {
             <h2 className="glow-text-sm">Next-Gen Dashboard Experience</h2>
             <p>Manage notes, track classes, and explore tools — all from one sleek interface.</p>
             <br></br>
+            <link to="/dashboard">
             <button className="btn secondary">View Dashboard</button>
+            </link>
           </div>
           <div className="preview-box">
             <div className="dashboard-mockup">
@@ -69,7 +75,7 @@ const Home = () => {
 
       {/* Footer CTA */}
       <section className="footer-cta">
-        <h2 className="glow-text-sm">Need Help? Contact Us</h2>
+        <h2 className="glow-text-sm">Contact Us</h2>
         <ContactForm />
       </section>
     </div>

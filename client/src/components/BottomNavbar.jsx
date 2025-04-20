@@ -10,7 +10,7 @@ function BottomNavbar() {
       <Link to="/more" className="nav-icon"><i className="fas fa-bars"></i></Link>
       <a href="https://resourcehub.rf.gd/" target="_blank" className="nav-icon" rel="noopener noreferrer"><i className="fas fa-calendar-alt"></i></a>
       <Link to="/" className={`nav-icon home-icon ${pathname === '/' ? 'active' : ''}`}>
-        <img src="/src/assets/hub.ico" alt="Home" className="home-img"/>
+        <img src="../src/assets/hub.ico" alt="Home" className="home-img"/>
       </Link>
       <Link to="/notes" className="nav-icon"><i className="fas fa-book"></i></Link>
       <Link to="/profile" className="nav-icon"><i className="fas fa-user"></i></Link>
