@@ -6,6 +6,7 @@ function BottomNavbar() {
   const { pathname } = useLocation()
 
   return (
+    
     <div className="bottom-navbar">
       <Link to="/more" className="nav-icon"><i className="fas fa-bars"></i></Link>
       <a href="https://resourcehub.rf.gd/" target="_blank" className="nav-icon" rel="noopener noreferrer"><i className="fas fa-calendar-alt"></i></a>

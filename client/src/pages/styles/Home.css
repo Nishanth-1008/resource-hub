@@ -27,9 +27,13 @@ body, html {
   .hero {
     padding: 100px 20px 60px;
     text-align: center;
-    background: radial-gradient(circle at top, #121222, #0e0e1c);
+    background: black;
   }
-  
+  .heroimg {
+    margin-top: -60px;
+    object-fit: cover;
+    object-position: center;
+  }
   .glow-text {
     font-size: 3rem;
     color: #00f7ff;
@@ -171,7 +175,7 @@ body, html {
     padding: 60px 20px;
     display: flex;
     justify-content: center;
-    background: linear-gradient(to right top, #0d0d1f, #141430);
+    background: url(../src/assets/starss.jpg);
   }
   
   .feature-grid {
@@ -217,7 +221,8 @@ body, html {
   /* Preview Section */
   .preview-section {
     padding: 80px 20px;
-    background: linear-gradient(145deg, #121222, #0e0e1c);
+    /* background: linear-gradient(145deg, #121222, #0e0e1c); */
+    background: url(../src/assets/starss.jpg);
   }
   
   .preview-container {
@@ -259,7 +264,8 @@ body, html {
   /* Footer CTA */
   .footer-cta {
     padding: 60px 20px;
-    background: linear-gradient(to right, #0a0a1a, #121222);
+    /* background: linear-gradient(to right, #0a0a1a, #121222); */
+    background: url(../src/assets/starss.jpg);
     text-align: center;
   }
   
@@ -306,4 +312,5 @@ body, html {
   }
   
   /* Fonts */
+  
   

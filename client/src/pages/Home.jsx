@@ -7,9 +7,11 @@ import { FaBook, FaVideo, FaCalendarAlt, FaTools } from 'react-icons/fa'
 const Home = () => {
   return (
     <div className="main-wrapper">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       {/* Hero Section */}
       <section className="hero">
         <div className="hero-content">
+          <div className='heroimg'><img src='../src/assets/banner-hub.jpg' width={200}></img></div>
           <h1 className="glow-text">Lights On Learning. Dark Mode On Style.</h1>
           <br></br>
           <p className="hero-subtext">Welcome to <span className="highlight">Resource Hub</span> — A student dashboard built for the future.</p>
