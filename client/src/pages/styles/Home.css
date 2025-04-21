@@ -175,7 +175,7 @@ body, html {
     padding: 60px 20px;
     display: flex;
     justify-content: center;
-    background: url(../src/assets/starss.jpg);
+    background: url(/src/assets/starss.jpg);
   }
   
   .feature-grid {
@@ -222,7 +222,7 @@ body, html {
   .preview-section {
     padding: 80px 20px;
     /* background: linear-gradient(145deg, #121222, #0e0e1c); */
-    background: url(../src/assets/starss.jpg);
+    background: url(/src/assets/starss.jpg);
   }
   
   .preview-container {
@@ -265,7 +265,7 @@ body, html {
   .footer-cta {
     padding: 60px 20px;
     /* background: linear-gradient(to right, #0a0a1a, #121222); */
-    background: url(../src/assets/starss.jpg);
+    background: url(/src/assets/starss.jpg);
     text-align: center;
   }
   
