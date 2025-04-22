@@ -1,7 +1,7 @@
 // Updated StudentDashboard.jsx
 import React, { useState, useEffect } from 'react';
 import './styles/StudentDashboard.css';
-import YouTubePlayer from '/src/components/YoutubePlayer';
+import YouTubePlayer from '/src/components/YouTubePlayer';
 import FocusTimer from '/src/components/FocusTimer';
 
 const StudentDashboard = () => {
