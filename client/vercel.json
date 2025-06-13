@@ -1,8 +1,18 @@
 {
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.html",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
   "routes": [
-    { "src": "/", "dest": "/" },
-    { "src": "/recruit", "dest": "/" }
-    { "src": "/tos", "dest": "/" }
-    // ....
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
   ]
 }
